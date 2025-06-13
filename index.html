@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive fragrance guide with personalized recommendations" />
+  <title>Fragrance Wear Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Georgia:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Fragrance Wear Guide</h1>
+    <button class="theme-toggle" aria-label="Toggle dark/light mode">🌓</button>
+  </header>
+  
+  <main class="container">
+    <!-- Weather summary -->
+    <div id="weather" class="weather-widget">Loading weather…</div>
+    
+    <div class="search-container">
+      <label for="fragrance-search" class="visually-hidden">Search fragrances</label>
+      <input type="text" id="fragrance-search" class="search-input" 
+             placeholder="Search by name, season, occasion..." 
+             aria-label="Search fragrances">
+    </div>
+    
+    <!-- Filter buttons -->
+    <div class="filter-section">
+      <h2>Refine Selection</h2>
+      
+      <div class="filter-group">
+        <h3>Time of Day</h3>
+        <div class="filter-buttons" data-filter-type="time">
+          <button class="filter-btn" data-value="Morning">Morning</button>
+          <button class="filter-btn" data-value="Daytime">Daytime</button>
+          <button class="filter-btn" data-value="Evening">Evening</button>
+          <button class="filter-btn" data-value="Night">Night</button>
+        </div>
+      </div>
+      
+      <div class="filter-group">
+        <h3>Season</h3>
+        <div class="filter-buttons" data-filter-type="season">
+          <button class="filter-btn" data-value="Spring">Spring</button>
+          <button class="filter-btn" data-value="Summer">Summer</button>
+          <button class="filter-btn" data-value="Fall">Fall</button>
+          <button class="filter-btn" data-value="Winter">Winter</button>
+        </div>
+      </div>
+      
+      <div class="filter-group">
+        <h3>Temperature</h3>
+        <div class="filter-buttons" data-filter-type="temp">
+          <button class="filter-btn" data-value="cold">Cold (Below 50°F)</button>
+          <button class="filter-btn" data-value="cool">Cool (50-60°F)</button>
+          <button class="filter-btn" data-value="mild">Mild (60-75°F)</button>
+          <button class="filter-btn" data-value="warm">Warm (Above 75°F)</button>
+        </div>
+      </div>
+      
+      <div class="filter-group">
+        <h3>Occasion</h3>
+        <div class="filter-buttons" data-filter-type="occasion">
+          <button class="filter-btn" data-value="Casual">Casual</button>
+          <button class="filter-btn" data-value="Office">Office</button>
+          <button class="filter-btn" data-value="Date">Date Night</button>
+          <button class="filter-btn" data-value="Formal">Formal</button>
+        </div>
+      </div>
+      
+      <button id="clear-filters" class="clear-btn">Clear All Filters</button>
+    </div>
+    
+    <!-- Fragrance cards go here -->
+    <div id="fragrances" class="grid-container"></div>
+  </main>
+  
+  <script src="app.js" defer></script>
+</body>
+</html>
