@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive fragrance guide with personalized recommendations" />
+  <title>Fragrance Wear Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Georgia:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Fragrance Wear Guide</h1>
+    <button class="theme-toggle" aria-label="Toggle dark/light mode">🌓</button>
+  </header>
+  
+  <main class="container">
+    <!-- Botanical SVG backgrounds -->
+    <div class="botanical-bg" aria-hidden="true">
+      <!-- Lavender illustration -->
+      <svg class="botanical botanical-lavender" viewBox="0 0 120 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 300 Q65 200 60 100 Q55 50 60 20" stroke="#b5b3a7" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 6"/>
+        <ellipse cx="60" cy="20" rx="6" ry="12" fill="#e0ddd5" fill-opacity="0.18"/>
+        <ellipse cx="60" cy="60" rx="4" ry="8" fill="#e0ddd5" fill-opacity="0.12"/>
+        <ellipse cx="60" cy="100" rx="3" ry="6" fill="#e0ddd5" fill-opacity="0.10"/>
+      </svg>
+      <!-- Bergamot illustration -->
+      <svg class="botanical botanical-bergamot" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="30" stroke="#b5b3a7" stroke-width="1.2" fill="#f5f5f0" fill-opacity="0.10"/>
+        <path d="M60 30 Q65 60 90 60" stroke="#b5b3a7" stroke-width="1" stroke-dasharray="2 4"/>
+        <path d="M60 30 Q55 60 30 60" stroke="#b5b3a7" stroke-width="1" stroke-dasharray="2 4"/>
+      </svg>
+      <!-- Cedar illustration -->
+      <svg class="botanical botanical-cedar" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 70 Q60 40 100 70 Q140 100 180 70" stroke="#b5b3a7" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="5 7"/>
+        <ellipse cx="100" cy="70" rx="12" ry="6" fill="#e0ddd5" fill-opacity="0.10"/>
+      </svg>
+    </div>
+    <!-- Paper grain/glass reflection overlay -->
+    <div class="texture-overlay" aria-hidden="true"></div>
+    <!-- Weather summary -->
+    <div id="weather" class="weather-widget">Loading weather…</div>
+    <!-- Collapsible filter accordion -->
+    <div class="filter-accordion sticky">
+      <button id="filter-accordion-toggle" class="filter-accordion-toggle" aria-expanded="false" aria-controls="filter-accordion-content">Filters ▾</button>
+      <div id="filter-accordion-content" class="filter-accordion-content" hidden>
+        <div class="filter-section">
+          <h2>Refine Selection</h2>
+          <div class="filter-group">
+            <h3>Time of Day</h3>
+            <div class="filter-buttons" data-filter-type="time">
+              <button class="filter-btn" data-value="Morning">Morning</button>
+              <button class="filter-btn" data-value="Daytime">Daytime</button>
+              <button class="filter-btn" data-value="Evening">Evening</button>
+              <button class="filter-btn" data-value="Night">Night</button>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h3>Season</h3>
+            <div class="filter-buttons" data-filter-type="season">
+              <button class="filter-btn" data-value="Spring">Spring</button>
+              <button class="filter-btn" data-value="Summer">Summer</button>
+              <button class="filter-btn" data-value="Fall">Fall</button>
+              <button class="filter-btn" data-value="Winter">Winter</button>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h3>Temperature</h3>
+            <div class="slider-row">
+              <label for="temp-slider" class="slider-label">Custom Temp:</label>
+              <input type="range" min="40" max="100" value="70" id="temp-slider" class="temp-slider" step="1">
+              <span id="temp-slider-value" class="slider-value">70°F</span>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h3>Occasion</h3>
+            <div class="filter-buttons" data-filter-type="occasion">
+              <button class="filter-btn" data-value="Casual">Casual</button>
+              <button class="filter-btn" data-value="Office">Office</button>
+              <button class="filter-btn" data-value="Date">Date Night</button>
+              <button class="filter-btn" data-value="Formal">Formal</button>
+            </div>
+          </div>
+          <button id="clear-filters" class="clear-btn">Clear All Filters</button>
+        </div>
+      </div>
+    </div>
+    <!-- Mood ring/confidence indicator -->
+    <div id="mood-ring-indicator" class="mood-ring-indicator" aria-live="polite"></div>
+    <div id="fragrances" class="grid-container"></div>
+  </main>
+  
+  <script src="app.js" defer></script>
+</body>
+</html>
