@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Fragrance Lab: wear guide, oil library, and fragrance creator." />
+  <title>Fragrance Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">Personal Fragrance System</p>
+      <h1>Fragrance Lab</h1>
+    </div>
+    <nav class="top-nav" aria-label="Main navigation">
+      <button class="nav-btn active" data-page="guide">Wear Guide</button>
+      <button class="nav-btn" data-page="creator">Fragrance Creator</button>
+      <button class="nav-btn" data-page="library">Oil Library</button>
+    </nav>
+    <button class="theme-toggle" aria-label="Toggle dark/light mode">☾</button>
+  </header>
+
+  <main class="container">
+    <section id="page-guide" class="page active">
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow">Daily Recommendation</p>
+          <h2>Choose the right fragrance for the moment.</h2>
+          <p class="muted">Filter by season, time, occasion, and temperature. The guide highlights your strongest matches automatically.</p>
+        </div>
+        <div id="weather" class="weather-widget">Loading weather…</div>
+      </section>
+
+      <section class="panel filters-panel">
+        <div class="section-head">
+          <h3>Refine Selection</h3>
+          <button id="clear-filters" class="ghost-btn">Clear</button>
+        </div>
+        <input id="fragrance-search" class="text-input" type="search" placeholder="Search fragrance, notes, occasion…" />
+        <div class="filter-grid">
+          <div class="filter-group">
+            <h4>Time</h4>
+            <div class="pill-row" data-filter-type="time">
+              <button class="pill" data-value="Morning">Morning</button>
+              <button class="pill" data-value="Daytime">Daytime</button>
+              <button class="pill" data-value="Evening">Evening</button>
+              <button class="pill" data-value="Night">Night</button>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h4>Season</h4>
+            <div class="pill-row" data-filter-type="season">
+              <button class="pill" data-value="Spring">Spring</button>
+              <button class="pill" data-value="Summer">Summer</button>
+              <button class="pill" data-value="Fall">Fall</button>
+              <button class="pill" data-value="Winter">Winter</button>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h4>Occasion</h4>
+            <div class="pill-row" data-filter-type="occasion">
+              <button class="pill" data-value="Casual">Casual</button>
+              <button class="pill" data-value="Office">Office</button>
+              <button class="pill" data-value="Date">Date</button>
+              <button class="pill" data-value="Formal">Formal</button>
+            </div>
+          </div>
+          <div class="filter-group slider-card">
+            <h4>Temperature</h4>
+            <label class="slider-row" for="temp-slider">
+              <input type="range" min="40" max="100" value="70" id="temp-slider" step="1">
+              <span id="temp-slider-value">70°F</span>
+            </label>
+            <p id="temp-filter-note" class="helper-text">Showing all colognes. Temperature is only used for match scores until you move the slider.</p>
+          </div>
+        </div>
+      </section>
+
+      <div id="match-summary" class="match-summary"></div>
+      <section id="fragrances" class="card-grid"></section>
+    </section>
+
+    <section id="page-creator" class="page">
+      <section class="hero-card creator-hero">
+        <div class="creator-title-copy">
+          <p class="eyebrow">Formula Builder</p>
+          <h2>Build a fragrance from your materials.</h2>
+          <p class="muted">Select oils, set percentages, and get structure, performance, scent profile, wearability, warnings, and clone-style similarity.</p>
+        </div>
+      </section>
+
+      <div class="formula-sticker" aria-live="polite">
+        <span id="formula-total">0%</span>
+        <small>Total Formula</small>
+        <p id="formula-total-help">Build the concentrate to 100%.</p>
+      </div>
+
+      <section class="creator-layout">
+        <div class="panel builder-panel">
+          <div class="section-head">
+            <h3>Formula</h3>
+            <button id="reset-formula" class="ghost-btn">Reset</button>
+          </div>
+          <div class="builder-intro">
+            <p class="helper-text">Choose a material by note level, enter its formula percentage, then add it to the blend.</p>
+          </div>
+          <div id="material-picker" class="material-picker" aria-label="Material picker grouped by note level"></div>
+          <div class="quick-actions">
+            <button class="ghost-btn preset-btn" data-preset="freshWoody">Load Fresh Woody</button>
+            <button class="ghost-btn preset-btn" data-preset="darkAmber">Load Dark Amber</button>
+            <button class="ghost-btn preset-btn" data-preset="cleanOffice">Load Clean Office</button>
+          </div>
+          <div id="selected-oils" class="selected-oils empty-state">No materials added yet.</div>
+          <div class="spray-settings">
+            <div>
+              <h4>Finished Spray Concentration</h4>
+              <p class="helper-text">Set the oil load of the final spray. Higher concentration increases longevity and projection.</p>
+            </div>
+            <label class="concentration-control">
+              <span>Oil</span>
+              <input id="oil-concentration" type="number" min="1" max="40" step="1" value="15" aria-label="Finished fragrance oil concentration percentage">
+              <b>%</b>
+            </label>
+          </div>
+        </div>
+
+        <div class="panel analysis-panel">
+          <div class="section-head">
+            <h3>Fragrance Analysis</h3>
+            <span id="formula-score" class="score-pill">0 / 100</span>
+          </div>
+          <div id="analysis-output" class="analysis-output empty-analysis">
+            Add materials to see the analysis.
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="page-library" class="page">
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow">Material Database</p>
+          <h2>Your oil collection, cleaned and classified.</h2>
+          <p class="muted">The creator uses these classifications and performance values to score each formula without AI.</p>
+        </div>
+        <input id="oil-search" class="text-input library-search" type="search" placeholder="Search oils, families, vibe…">
+      </section>
+      <div class="library-tabs" data-library-filter="all">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="Top">Top</button>
+        <button class="pill" data-filter="Mid">Mid</button>
+        <button class="pill" data-filter="Base">Base</button>
+        <button class="pill" data-filter="Modifier">Modifiers</button>
+        <button class="pill" data-filter="Support">Support</button>
+      </div>
+      <section id="oil-library" class="card-grid library-grid"></section>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

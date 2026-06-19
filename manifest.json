@@ -1,0 +1,10 @@
+{
+  "name": "Fragrance Lab",
+  "short_name": "Fragrance Lab",
+  "description": "Wear guide, oil library, and fragrance creator.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f4f0e8",
+  "theme_color": "#9d8563",
+  "icons": []
+}
